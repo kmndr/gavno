@@ -7,7 +7,6 @@ import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import expression.parser.ExpressionParser;
@@ -16,7 +15,7 @@ import expression.parser.ExpressionParser;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText Display;
+    TextView Display;
 
     Button zero;
     Button one;
@@ -36,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
     Button clear;
     Button point;
 
-    final static int CLEAR = 1;
-    final static int DONT_CLEAR = 0;
-    int clearCalcDisplay = 0;
 
     private static String LOG_TAG = "MainActivity";
     private static final String KEY_CNT = "CNT";
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        zero =  findViewById(R.id._0);
+        zero = findViewById(R.id._0);
         one = findViewById(R.id._1);
         two = findViewById(R.id._2);
         three = findViewById(R.id._3);
@@ -69,135 +65,136 @@ public class MainActivity extends AppCompatActivity {
 
         Display.setKeyListener(DigitsKeyListener.getInstance(true, true));
 
-        registerListeners();
-
-    }
-
-    public void registerListeners() {
-
         zero.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("0");
+                Display.setText(Display.getText().toString() + "0");
             }
         });
 
         one.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("1");
+                Display.setText(Display.getText().toString() + "1");
             }
         });
 
         two.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("2");
+                Display.setText(Display.getText().toString() + "2");
             }
         });
 
         three.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("3");
+                Display.setText(Display.getText().toString() + "3");
             }
         });
 
         four.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("4");
+                Display.setText(Display.getText().toString() + "4");
             }
         });
 
         five.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("5");
+                Display.setText(Display.getText().toString() + "5");
             }
         });
 
         six.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("6");
+                Display.setText(Display.getText().toString() + "6");
             }
         });
 
         seven.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("7");
+                Display.setText(Display.getText().toString() + "7");
             }
         });
 
         eight.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("8");
+                Display.setText(Display.getText().toString() + "8");
             }
         });
 
         nine.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
-                Display.append("9");
-            }
-        });
-
-        addition.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Display.append("+");
-            }
-        });
-
-        subtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Display.append("-");
-            }
-        });
-
-        multiply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Display.append("*");
-            }
-        });
-
-        division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Display.append("/");
+                Display.setText(Display.getText().toString() + "9");
             }
         });
 
         point.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                Display.setText(Display.getText().toString() + ".");
+            }
+        });
+
+
+        addition.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                Display.setText(Display.getText().toString() + "+");
+            }
+        });
+
+        subtract.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
 
-                Display.append(".");
+                Display.setText(Display.getText().toString() + "-");
             }
         });
+
+        multiply.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+
+                Display.setText(Display.getText().toString() + "*");
+            }
+        });
+
+        division.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+
+                Display.setText(Display.getText().toString() + "/");
+            }
+        });
+
+
 
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Display.setText("");
             }
         });
@@ -215,13 +212,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
         super.onSaveInstanceState(outState);
         outState.putString(KEY_CNT, Display.getText().toString());
+
     }
 
     @Override
